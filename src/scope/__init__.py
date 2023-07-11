@@ -1,5 +1,6 @@
 __version__ = "0.1.0"
-from contextlib import suppress
+from contextlib import suppress as _suppress
+
 
 class Lens:
     def __init__(self, get, put):
@@ -7,7 +8,7 @@ class Lens:
         self.put = put
 
     def call(self, f, f_inv=None):
-        with suppress(Exception):
+        with _suppress(Exception):
             f_inv = f_inv or ~f
 
         getter = lambda data: f(self.get(data))
@@ -18,7 +19,7 @@ class Lens:
         return Lens(getter, setter)
 
     def pcall(self, f, f_inv=None):
-        with suppress(Exception):
+        with _suppress(Exception):
             f_inv = f_inv or ~f
 
         return lambda data: self.put(f(self.get(data)))(data)
@@ -111,13 +112,13 @@ class Traversal(Lens):
             return Traversal(self, ItemLens(item))
 
     def call(self, f, f_inv=None):
-        with suppress(Exception):
+        with _suppress(Exception):
             f_inv = f_inv or ~f
 
         return lambda data: [f(d) for d in self.get(data)]
 
     def pcall(self, f, f_inv=None):
-        with suppress(Exception):
+        with _suppress(Exception):
             f_inv = f_inv or ~f
 
         return lambda data: self.put([f(d) for d in self.get(data)])(data)
@@ -150,7 +151,7 @@ class CRUDLens(Lens):
         self.delete = delete
 
     def call(self, f, f_inv=None):
-        with suppress(Exception):
+        with _suppress(Exception):
             f_inv = f_inv or ~f
 
         getter = lambda data: f(self.get(data))
@@ -283,7 +284,7 @@ class CRUDTraversal(CRUDLens):
             return CRUDTraversal(self, ItemCRUDLens(item))
 
     def call(self, f, f_inv=None):
-        with suppress(Exception):
+        with _suppress(Exception):
             f_inv = f_inv or ~f
 
         return lambda data: [f(d) for d in self.get(data)]
