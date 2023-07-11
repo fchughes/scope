@@ -4,6 +4,10 @@ Scope is a Python library inspired by _optics_ from functional programming. The 
 
 This library favors usability over rigor and makes some decisions which increase utility at the expense of overloading and extending established terminology. For example, _traversals_ in the standard usage, provide a means of focusing on multiple parts of a datastructure but do not provide similar setting behavior, whereas instances of the `scope.Traversal` class do provide a way to set multiple parts of a larger datastructure.
 
+## Install
+
+Install by running `pip install scope-py` or by cloning this repo and running `pip install .` in the project root directory.
+
 ## Introduction
 
 The Scope library targets manipulation of JSON-like nested structures, which in Python are built from dictionaries, and lists, but custom _optics_ are definable. Scope has a few classes you should be aware of;
@@ -20,7 +24,7 @@ Importantly, a `Lens` focuses on one thing and a `Traversals` focuses on many th
 
 ## Usage
 
-### Basic lens composition example:
+### Basic lens composition:
 
 ```python
 import scope
@@ -36,7 +40,7 @@ assert lens(data) == 3
 assert lens.put(4)(data) == {'a': {'b': 4}}
 ```
 
-### CRUDTraversal example:
+### CRUDTraversal usage:
 
 ```python
 lens = CRUDTraversal(ItemCRUDLens('a'), ItemCRUDLens('c'))
@@ -48,14 +52,14 @@ data = {'a': [{'b': 1}, {'b': 3}]}
 print(lens.create([2, 4])(data))
 ```
 
-### Custom attribute lens example:
+### Create a custom attribute lens:
 
 ```python
 # create a lens that gets/sets the attribute "my_attr" on an object
 my_attr_lens = scope.Lens(lambda data: getattr(data, 'my_attr'), lambda value: lambda data: setattr(data, 'my_attr', value))
 ```
 
-### Parallel lens example:
+### Parallel lens usage:
 
 ```python
 x_lens, y_lens = scope.id['x'], scope.id['y']
@@ -68,6 +72,13 @@ data = {'x': 2, 'y': 3}
 
 assert sum(parallel_lens(data)) == 5
 ```
+
+## Todo‘s
+
+- [] Clean up unused files leftover from cloned template repo
+- [] Tests to achieve 100% code coverage
+- [] Add a `filter` method to all classes which accepts a predicate function and applies it to the focus
+- [] Add tests passing and code coverage badges using Github Pages
 
 ## License
 
