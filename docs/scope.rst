@@ -7,15 +7,15 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
-   python_package.hello_world
+   scope
 
 Submodules
 ----------
 
-python\_package.setup module
+scope.setup module
 ----------------------------
 
-.. automodule:: python_package.setup
+.. automodule:: scope.setup
    :members:
    :undoc-members:
    :show-inheritance:
@@ -23,7 +23,7 @@ python\_package.setup module
 Module contents
 ---------------
 
-.. automodule:: python_package
+.. automodule:: scope
    :members:
    :undoc-members:
    :show-inheritance:
