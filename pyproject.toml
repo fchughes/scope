@@ -3,7 +3,7 @@ requires = ["flit"]
 build-backend = "flit.buildapi"
 
 [project]
-name = "py-project-toml"
+name = "scope-py"
 authors = [{ name = "Forest Hughes", email = "forestchughes@gmail.com" }]
 description = "A lens library which targets usability over rigor."
 readme = "README.md"
