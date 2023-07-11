@@ -56,7 +56,8 @@ print(lens.create([2, 4])(data))
 
 ```python
 # create a lens that gets/sets the attribute "my_attr" on an object
-my_attr_lens = scope.Lens(lambda data: getattr(data, 'my_attr'), lambda value: lambda data: setattr(data, 'my_attr', value))
+my_attr_lens = scope.Lens(lambda data: getattr(data, 'my_attr'),
+                          lambda value: lambda data: setattr(data, 'my_attr', value))
 ```
 
 ### Parallel lens usage:
